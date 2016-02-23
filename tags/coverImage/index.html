@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Sane">
-    <title>归档: 2016/1 - Sane</title>
+    <title>标签: coverImage - Sane</title>
     <meta name="author" content="Sane Chen">
     
     
@@ -16,7 +16,7 @@
     <meta name="description">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Sane">
-<meta property="og:url" content="http://localhost:4000/archives/2016/01/index.html">
+<meta property="og:url" content="http://localhost:4000/tags/coverImage/index.html">
 <meta property="og:site_name" content="Sane">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -205,26 +205,26 @@
 <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2016/01/05/麦肯锡方法/">
-                            麦肯锡方法
+                        <a class="link-unstyled" href="/2016/02/23/Tranquilpeak设置问题/">
+                            Tranquilpeak设置问题
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" content="Tue Jan 05 2016 22:43:34 GMT+0800">
+    <time itemprop="datePublished" content="Tue Feb 23 2016 17:37:24 GMT+0800">
 	
-		    1月 05, 2016
+		    2月 23, 2016
     	
     </time>
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/blog/">blog</a>
+    <a class="category-link" href="/categories/hexo/">hexo</a>
 
 
     
@@ -232,13 +232,21 @@
             </div>
             
             
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>以事实为依据<br>系统化的<br>大胆假设，小心求证<br>
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p>CoverImage：<br>在较小屏幕尺寸时，右侧会显示coverImage的一个很小的竖条，问题产生的原因是cover的css左侧位置与navbar的左侧起始位置不同，导致他们虽然长度相同，但依然不会对其。解决方法是：找到tranquilpeak/layout中的layout.ejs，修改body</p>
+<pre><code>&lt;body style=&quot;overflow:scroll;overflow-x:hidden&quot;&gt;
+</code></pre><p>以禁止左右滚动，这样就完成了。当然你还可以通过修改cover的css，这就留给你们自己探索了。</p>
+
                     
-                        <a href="/2016/01/05/麦肯锡方法/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
                         
+
+                    
+                    
+                        <p>
+                            <a href="/2016/02/23/Tranquilpeak设置问题/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
                     
                 </div>
             
@@ -255,7 +263,6 @@
 </div>
 
 </section>
-
 
 
                 <footer id="footer" class="main-content-wrap">
