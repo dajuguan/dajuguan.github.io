@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="zh-cn">
-     
+    
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,7 +37,10 @@
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style-ejlztp1tasruqfvoz6xmgqng0anzae8ox7cqjj5yibieqgcmhe9fwxfae6zj.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox-thumbs.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/tranquilpeak.css" type="text/css">
     <!--STYLES END-->
     
     
@@ -53,9 +56,7 @@
 
 </head>
 
-
-    <body style="overflow-x:hidden" >
-
+    <body>
         <div id="blog">
             <!-- Define author's picture -->
 
@@ -75,8 +76,6 @@
         
         </a>
     
-
-
 </header>
 
             <!-- Define author's picture -->
@@ -194,8 +193,7 @@
     
 </nav>
 
-             
-
+            
             <div id="main" data-behavior="3"
                  class="
                         hasCoverMetaIn
@@ -266,47 +264,44 @@
         </ul>
     </nav>
     <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm hide-xs">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至QQ空间" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions tooltip--left" data-tooltip="分享到" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default tooltip--left" data-tooltip="分享QQ空间" target="new" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
                 <i class="fa fa-qq"></i>
             </a>
         </li>
 
-         <li class="post-action">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至QQ空间" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
-                <i class="fa fa-qq"></i>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new"  data-tooltip="分享至朋友圈" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
+                <i class="fa fa-weixin"></i>
             </a>
         </li>
-
-        <li class="post-action">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至朋友圈" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
-            <i class="fa fa-weixin"></i>
-            </a>
-        </li>
-
-
-        <li class="post-action">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至人人网" href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
-                <i class="fa fa-renren"></i>
-            </a>
-        </li>
-        <li class="post-action">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
-
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至人人网" href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
+                <i class="fa fa-renren"></i>
+            </a>
+        </li>
 
         
             <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#ds-thread">
+                <a class="post-action-btn btn btn--default" data-tooltip="评论" href="#ds-thread">
                     <i class="fa fa-comment-o"></i>
                 </a>
             </li>
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#">
+                <a class="post-action-btn btn btn--default tooltip--left" data-tooltip="侧边栏" href="#">
             
                 <i class="fa fa-list"></i>
             </a>
@@ -359,47 +354,44 @@
         </ul>
     </nav>
     <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm hide-xs">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至QQ空间" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions tooltip--left" data-tooltip="分享到" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default tooltip--left" data-tooltip="分享QQ空间" target="new" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
                 <i class="fa fa-qq"></i>
             </a>
         </li>
 
-         <li class="post-action">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至QQ空间" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
-                <i class="fa fa-qq"></i>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new"  data-tooltip="分享至朋友圈" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
+                <i class="fa fa-weixin"></i>
             </a>
         </li>
-
-        <li class="post-action">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至朋友圈" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
-            <i class="fa fa-weixin"></i>
-            </a>
-        </li>
-
-
-        <li class="post-action">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至人人网" href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
-                <i class="fa fa-renren"></i>
-            </a>
-        </li>
-        <li class="post-action">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
-
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至人人网" href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
+                <i class="fa fa-renren"></i>
+            </a>
+        </li>
 
         
             <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#ds-thread">
+                <a class="post-action-btn btn btn--default" data-tooltip="评论" href="#ds-thread">
                     <i class="fa fa-comment-o"></i>
                 </a>
             </li>
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#">
+                <a class="post-action-btn btn btn--default tooltip--left" data-tooltip="侧边栏" href="#">
             
                 <i class="fa fa-list"></i>
             </a>
@@ -412,18 +404,18 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="3">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=weibo&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
                 <i class="fa fa-weibo"></i><span class="">分享到 新浪微博</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
                 <i class="fa fa-qq"></i><span>分享到 QQ空间</span>
             </a>
         </li>
         <li class="share-option">
             <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2015/12/20/创业的坑/&amp;title=创业的坑">
-                <i class="fa fa-renren"></i><span>分享到 人人网</span>
+                <i class="fa fa-renren"></i><span>分享到人人网</span>
             </a>
         </li>
     </ul>
@@ -473,7 +465,10 @@
 <div id="cover" style="background-image:url('http://res.cloudinary.com/sane/image/upload/v1456127822/cover_phljcn.jpg');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="/assets/js/scrip-gfmrkxcl0qohe3cfdgxhzvc0yrceqta8i4iix0txvn8q4o2adlqd5n0jmkvt.min.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.fancybox.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.fancybox-thumbs.js" type="text/javascript"></script>
+<script src="/assets/js/tranquilpeak.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
 
     
