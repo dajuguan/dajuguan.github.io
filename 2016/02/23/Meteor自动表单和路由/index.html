@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/2016/02/23/Meteor自动表单和路由/index.html">
 <meta property="og:site_name" content="Sane">
 <meta property="og:description" content="本节结束，你能学会    使用Meteor文件夹组织文件    组织不同的模板文件    使用iron:router包建立多页面应用">
-<meta property="og:updated_time" content="2016-02-23T14:14:46.000Z">
+<meta property="og:updated_time" content="2016-02-23T14:33:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Meteor自动表单和路由">
 <meta name="twitter:description" content="本节结束，你能学会    使用Meteor文件夹组织文件    组织不同的模板文件    使用iron:router包建立多页面应用">
@@ -56,7 +56,7 @@
 </head>
 
 
-    <body style="overflow-x:auto" >
+    <body style="overflow-x:hidden" >
 
         <div id="blog">
             <!-- Define author's picture -->
@@ -231,7 +231,7 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p>本节结束，你能学会<br>    使用Meteor文件夹组织文件<br>    组织不同的模板文件<br>    使用iron:router包建立多页面应用<br><a id="more"></a></p>
-<h5 id="在Meteor中，我们常常用到server-client-shared-lib-public这几个文件夹。"><a href="#在Meteor中，我们常常用到server-client-shared-lib-public这几个文件夹。" class="headerlink" title="在Meteor中，我们常常用到server,client,shared,lib,public这几个文件夹。"></a>在Meteor中，我们常常用到server,client,shared,lib,public这几个文件夹。</h5><p>server文件夹里面一般放入Meteor.isServer的文件，也就是只有server能看到的文件<br>client文件夹放入.js .html .css文件，因为只有浏览器端需要这些文件，server是不需要的<br>shared文件夹一般放入client和server共同需要知道的方法，比如Meteor.methods()<br>lib文件夹同样也是client和server都可调用的，只是它在程序一开始就执行，一般我们把数据库初始化放在这里。</p>
+<h5 id="在Meteor中，我们常常用到server-client-shared-lib-public这几个文件夹。"><a href="#在Meteor中，我们常常用到server-client-shared-lib-public这几个文件夹。" class="headerlink" title="在Meteor中，我们常常用到server,client,shared,lib,public这几个文件夹。"></a>在Meteor中，我们常常用到server,client,shared,lib,public这几个文件夹。</h5><p>  server文件夹里面一般放入Meteor.isServer的文件，也就是只有server能看到的文件<br>  client文件夹放入.js .html .css文件，因为只有浏览器端需要这些文件，server是不需要的<br>  shared文件夹一般放入client和server共同需要知道的方法，比如Meteor.methods()<br>  lib文件夹同样也是client和server都可调用的，只是它在程序一开始就执行，一般我们把数据库初始化放在这里。</p>
 <p>template文件不一定要放在一起，只要在client文件夹里面就可以了，因为在运行的时候，Meteor会自动把这些模板组织到一起</p>
 <p>最后，讲下iron:router, 在github上的官方文档：<a href="https://github.com/eventedmind/iron-router" target="_blank" rel="external">https://github.com/eventedmind/iron-router</a><br>首先安装这个包</p>
 <pre><code>meteor add iron:router
