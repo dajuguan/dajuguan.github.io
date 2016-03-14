@@ -201,7 +201,7 @@
 <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
@@ -212,7 +212,7 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" content="Mon Mar 14 2016 22:36:55 GMT+0800">
+    <time itemprop="datePublished" content="Mon Mar 14 2016 23:36:55 GMT+0800">
 	
 		    3月 14, 2016
     	
@@ -227,44 +227,23 @@
 </div>
             </div>
             
-                <div class="postShorten-thumbnailimg postShorten-thumbnailimg--bottom">
-                    <img alt="" itemprop="image" src="http://localhost:4000/2016/03/14/Node函数回调和错误处理/./async_pic@2x.png"/>
-                </div>
-                
             
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>当我们谈论JavaScript的时候，有两个显著的概念需要说明，我么在使用JavaScript的时候经常忽略这两个概念。</p>
-<pre><code>* 函数是一等公民(First-class functions):函数就像其他变量一样
-* Closures：
-    - 内部函数能获取所在的外部函数的全部变量
-    - 即使外部函数已经运行结束了，内部函数依然能获取外部函数的变量，回调函数就是一个例子
-</code></pre><p>在继续讨论回调之前，我们先了解一下异步调用：</p>
-<p><img src="async_pic@2x.png" alt="Async Picture" title="Async Picture"></p>
-<p>同步调用容易阻塞进程，而异步就不会了。我们可以把Long Running的计算或者I/O操作交给回调函数去做。</p>
-<p>异步I/O和回调又是如何实现的？</p>
-<p><img src="async_io_pic@2x.png" alt="Async_IO Picture" title="Async IO Picture"></p>
-<p>在Node环境中，有一个单线程的事件池（Event Loop），它不停地接收左边的requests，如果request包含I/O，那么它会交给一个回调函数，等输入结束之后回调函数再去处理I/)。</p>
-<p>举个栗子：<br>新建一个文件rectangle-1.js</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">module.exports = <span class="function"><span class="keyword">function</span><span class="params">(x,y,callback)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (x &lt; <span class="number">0</span> || y &lt; <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">"Rectangle dimensions should be greater than zero: l = "</span> + x + <span class="string">", and b = "</span> + y); </span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">else</span> </span><br><span class="line">			<span class="keyword">callback</span>(<span class="literal">null</span>, &#123;</span><br><span class="line">				perimeter: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123; <span class="keyword">return</span> (<span class="number">2</span>*(x+y)); &#125;,</span><br><span class="line">				area:<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123; <span class="keyword">return</span> (x*y); &#125; &#125;);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">catch</span>(error)&#123;<span class="keyword">callback</span>(error,<span class="literal">null</span>); &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Node的惯例是回调函数的第一个参数一般是error。</p>
-<p>然后再建立一个文件solveRect-1.js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rect = <span class="built_in">require</span>(<span class="string">'./rectangle-1'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">solveRect</span>(<span class="params">l,b</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"Solving for rect with l=%d, b=%d"</span>,l,b);</span><br><span class="line">	rect(l,b,<span class="function"><span class="keyword">function</span>(<span class="params">err,rect</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (err)&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(err);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">console</span>.log(<span class="string">"perimeter="</span>+rect.perimeter());</span><br><span class="line">			<span class="built_in">console</span>.log(<span class="string">"area="</span>+rect.area());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);	</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">solveRect(<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line">solveRect(-<span class="number">1</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>当我们谈论JavaScript的时候，有两个显著的概念需要说明，我么在使用JavaScript的时候经常忽略这两个概念。<br>
                     
+                        <a href="/2016/03/14/Node函数回调和错误处理/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-
-                    
-                    
-                        <p>
-                            <a href="/2016/03/14/Node函数回调和错误处理/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
         </div>
+        
+            <div class="postShorten-thumbnailimg">
+                <img alt="" itemprop="image" src="http://localhost:4000/2016/03/14/Node函数回调和错误处理/./async_pic@2x.png"/>
+            </div>
+            
         
     </article>
     
