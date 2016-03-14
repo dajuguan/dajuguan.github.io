@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://localhost:4000/"/>
-  <updated>2016-02-23T14:43:19.000Z</updated>
+  <updated>2016-03-14T15:24:36.000Z</updated>
   <id>http://localhost:4000/</id>
   
   <author>
@@ -14,6 +14,114 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>理解Node模块(Node Modules)</title>
+    <link href="http://localhost:4000/2016/03/14/%E7%90%86%E8%A7%A3Modules/"/>
+    <id>http://localhost:4000/2016/03/14/理解Modules/</id>
+    <published>2016-03-14T14:36:55.000Z</published>
+    <updated>2016-03-14T15:24:36.000Z</updated>
+    
+    <content type="html">&lt;p&gt;由于历史原因JavaScript对浏览器端的应用定义了APIs，但是没有为很多其他的应用定义一个标准库，所以后来的开发者弄出了CommonJS API以填补这个坑。使用CommonJS，人们就能做一下事情：&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务端的JS应用&lt;/li&gt;
+&lt;li&gt;命令行工具&lt;/li&gt;
+&lt;li&gt;桌面GUI应用&lt;/li&gt;
+&lt;li&gt;混合程序（Titanium, Adobe AIR）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;CommonJS定义了常用模块的格式，Node也继承了CommonJS的标准。&lt;/p&gt;
+&lt;p&gt;CommonJS模块标准参见：&lt;a href=&quot;http://wiki.commonjs.org/wiki/Modules/1.1.1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://wiki.commonjs.org/wiki/Modules/1.1.1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;那么Node Modules怎么使用呢？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Node中的每一个文件是它自身的模块（module）；
+module的变量作用域是当前的module所在的文件 ；
+module.exports定义了当前module的输出 ；
+使用require函数以引入module ；
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举个栗子吧：&lt;br&gt;新建一个文件名为rectangle.js:&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;module&lt;/span&gt;.exports = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	perimeter: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;x,y&lt;/span&gt;) &lt;/span&gt;&amp;#123; &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;*(x+y)); &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	area: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;x,y&lt;/span&gt;) &lt;/span&gt;&amp;#123; &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; ( x*y) )); &amp;#125; &amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;然后在同级目录下，建立另一个文件solveRect.js,这就实现了引入模块&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; rect = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(‘./rectangle’);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;当然还有另一种直接的方式输出：&lt;br&gt;&lt;figure class=&quot;highlight actionscript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;exports.perimeter = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(x, y)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;*(x+y)); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;exports.area = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(x, y)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (x*y); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;实际上，Node.js的modules分为三类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自定义的module&lt;/li&gt;
+&lt;li&gt;核心模块：比如path,fs,os,util&lt;/li&gt;
+&lt;li&gt;第三方模块：通过NPM安装后存在于node_modules的文件夹内&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这三类模块的使用方法也差不多：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;自定义的：require(&amp;apos;./module_name&amp;apos;)
+核心和第三方模块：require(&amp;apos;module_name&amp;apos;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Node寻找第三方模块的顺序是依次从当前目录的./node_modules找，接着找上一级目录的../node_modules，一直找到最上层目录，直到找到为止&lt;/p&gt;
+&lt;p&gt;对于一个Node模块来说，我们可查看他的package.json文件来了解它包含的信息：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;版本version：依次是&amp;lt;MajorVersion&amp;gt;.&amp;lt;MinorVersion&amp;gt;.&amp;lt;Patch&amp;gt;
+使用npm安装特定包的版本有三种方式：
+    精确匹配只兼容这一个版本：npm install express@4.0.0
+    只兼容补丁包(Patch)：npm install express@&amp;quot;~4.0.0&amp;quot;
+    可兼容小版本：npm install express@&amp;quot;^4.0.0&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;版本依赖&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm install express --save
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当你安装的时候带上了 –save ,npm会自动在你命令所在目录里找到 package.json 文件,并追加到依赖配置最后一样。&lt;br&gt;当不加任何版本安装时,默认追加方式是这样的:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;express&amp;quot;: &amp;quot;^4.0.0&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于历史原因JavaScript对浏览器端的应用定义了APIs，但是没有为很多其他的应用定义一个标准库，所以后来的开发者弄出了CommonJS API以填补这个坑。使用CommonJS，人们就能做一下事情：&lt;br&gt;
+    
+    </summary>
+    
+      <category term="blog" scheme="http://localhost:4000/categories/blog/"/>
+    
+    
+      <category term="Node Modules" scheme="http://localhost:4000/tags/Node-Modules/"/>
+    
+      <category term="Node.js" scheme="http://localhost:4000/tags/Node-js/"/>
+    
+      <category term="Node模块" scheme="http://localhost:4000/tags/Node%E6%A8%A1%E5%9D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node函数回调和错误处理(Callbacks,Error Handling)</title>
+    <link href="http://localhost:4000/2016/03/14/Node%E5%87%BD%E6%95%B0%E5%9B%9E%E8%B0%83%E5%92%8C%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/"/>
+    <id>http://localhost:4000/2016/03/14/Node函数回调和错误处理/</id>
+    <published>2016-03-14T14:36:55.000Z</published>
+    <updated>2016-03-14T16:20:04.000Z</updated>
+    
+    <content type="html">&lt;p&gt;当我们谈论JavaScript的时候，有两个显著的概念需要说明，我么在使用JavaScript的时候经常忽略这两个概念。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;* 函数是一等公民(First-class functions):函数就像其他变量一样
+* Closures：
+    - 内部函数能获取所在的外部函数的全部变量
+    - 即使外部函数已经运行结束了，内部函数依然能获取外部函数的变量，回调函数就是一个例子
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在继续讨论回调之前，我们先了解一下异步调用：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;async_pic@2x.png&quot; alt=&quot;Async Picture&quot; title=&quot;Async Picture&quot;&gt;&lt;/p&gt;
+&lt;p&gt;同步调用容易阻塞进程，而异步就不会了。我们可以把Long Running的计算或者I/O操作交给回调函数去做。&lt;/p&gt;
+&lt;p&gt;异步I/O和回调又是如何实现的？&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;async_io_pic@2x.png&quot; alt=&quot;Async_IO Picture&quot; title=&quot;Async IO Picture&quot;&gt;&lt;/p&gt;
+&lt;p&gt;在Node环境中，有一个单线程的事件池（Event Loop），它不停地接收左边的requests，如果request包含I/O，那么它会交给一个回调函数，等输入结束之后回调函数再去处理I/)。&lt;/p&gt;
+&lt;p&gt;举个栗子：&lt;br&gt;新建一个文件rectangle-1.js&lt;/p&gt;
+&lt;figure class=&quot;highlight haxe&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;module.exports = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(x,y,callback)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (x &amp;lt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; || y &amp;lt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&lt;span class=&quot;keyword&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Error(&lt;span class=&quot;string&quot;&gt;&quot;Rectangle dimensions should be greater than zero: l = &quot;&lt;/span&gt; + x + &lt;span class=&quot;string&quot;&gt;&quot;, and b = &quot;&lt;/span&gt; + y); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&lt;span class=&quot;keyword&quot;&gt;callback&lt;/span&gt;(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				perimeter: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;*(x+y)); &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				area:&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (x*y); &amp;#125; &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt;(error)&amp;#123;&lt;span class=&quot;keyword&quot;&gt;callback&lt;/span&gt;(error,&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;); &amp;#125; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Node的惯例是回调函数的第一个参数一般是error。&lt;/p&gt;
+&lt;p&gt;然后再建立一个文件solveRect-1.js&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; rect = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;./rectangle-1&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solveRect&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;l,b&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;Solving for rect with l=%d, b=%d&quot;&lt;/span&gt;,l,b);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	rect(l,b,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;err,rect&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (err)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;perimeter=&quot;&lt;/span&gt;+rect.perimeter());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;area=&quot;&lt;/span&gt;+rect.area());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;);	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;solveRect(&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;solveRect(-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当我们谈论JavaScript的时候，有两个显著的概念需要说明，我么在使用JavaScript的时候经常忽略这两个概念。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;* 函数是一等公民(First-class functions):函数就像其他变量一样
+* Closures：
+    -
+    
+    </summary>
+    
+      <category term="blog" scheme="http://localhost:4000/categories/blog/"/>
+    
+    
+      <category term="Node.js" scheme="http://localhost:4000/tags/Node-js/"/>
+    
+      <category term="callbacks" scheme="http://localhost:4000/tags/callbacks/"/>
+    
+      <category term="error handling" scheme="http://localhost:4000/tags/error-handling/"/>
+    
+  </entry>
   
   <entry>
     <title>Meteor自动表单和路由</title>

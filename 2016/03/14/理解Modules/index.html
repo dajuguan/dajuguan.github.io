@@ -6,25 +6,23 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Sane">
-    <title>Meteor自动表单和路由 - Sane</title>
+    <title>理解Node模块(Node Modules) - Sane</title>
     <meta name="author" content="Sane Chen">
-    
-        <meta name="keywords" content="Meteor,路由">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="本节结束，你能学会    使用Meteor文件夹组织文件    组织不同的模板文件    使用iron:router包建立多页面应用">
+    <meta name="description" content="由于历史原因JavaScript对浏览器端的应用定义了APIs，但是没有为很多其他的应用定义一个标准库，所以后来的开发者弄出了CommonJS API以填补这个坑。使用CommonJS，人们就能做一下事情：">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Meteor自动表单和路由">
-<meta property="og:url" content="http://localhost:4000/2016/02/23/Meteor自动表单和路由/index.html">
+<meta property="og:title" content="理解Node模块(Node Modules)">
+<meta property="og:url" content="http://localhost:4000/2016/03/14/理解Modules/index.html">
 <meta property="og:site_name" content="Sane">
-<meta property="og:description" content="本节结束，你能学会    使用Meteor文件夹组织文件    组织不同的模板文件    使用iron:router包建立多页面应用">
-<meta property="og:updated_time" content="2016-02-23T14:43:19.000Z">
+<meta property="og:description" content="由于历史原因JavaScript对浏览器端的应用定义了APIs，但是没有为很多其他的应用定义一个标准库，所以后来的开发者弄出了CommonJS API以填补这个坑。使用CommonJS，人们就能做一下事情：">
+<meta property="og:updated_time" content="2016-03-14T15:24:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Meteor自动表单和路由">
-<meta name="twitter:description" content="本节结束，你能学会    使用Meteor文件夹组织文件    组织不同的模板文件    使用iron:router包建立多页面应用">
+<meta name="twitter:title" content="理解Node模块(Node Modules)">
+<meta name="twitter:description" content="由于历史原因JavaScript对浏览器端的应用定义了APIs，但是没有为很多其他的应用定义一个标准库，所以后来的开发者弄出了CommonJS API以填补这个坑。使用CommonJS，人们就能做一下事情：">
     
     
         
@@ -205,19 +203,19 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            Meteor自动表单和路由
+            理解Node模块(Node Modules)
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Tue Feb 23 2016 20:37:24 GMT+0800">
+    <time itemprop="datePublished" content="Mon Mar 14 2016 22:36:55 GMT+0800">
 	
-		    2月 23, 2016
+		    3月 14, 2016
     	
     </time>
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/Meteor/">Meteor</a>
+    <a class="category-link" href="/categories/blog/">blog</a>
 
 
     
@@ -226,20 +224,44 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>本节结束，你能学会<br>    使用Meteor文件夹组织文件<br>    组织不同的模板文件<br>    使用iron:router包建立多页面应用<br><a id="more"></a></p>
-<h5 id="在Meteor中，我们常常用到server-client-shared-lib-public这几个文件夹。"><a href="#在Meteor中，我们常常用到server-client-shared-lib-public这几个文件夹。" class="headerlink" title="在Meteor中，我们常常用到server,client,shared,lib,public这几个文件夹。"></a>在Meteor中，我们常常用到server,client,shared,lib,public这几个文件夹。</h5><p>  server文件夹里面一般放入Meteor.isServer的文件，也就是只有server能看到的文件</p>
-<p>  client文件夹放入.js .html .css文件，因为只有浏览器端需要这些文件，server是不需要的</p>
-<p>  shared文件夹一般放入client和server共同需要知道的方法，比如Meteor.methods()</p>
-<p>  lib文件夹同样也是client和server都可调用的，只是它在程序一开始就执行，一般我们把数据库初始化放在这里。</p>
-<p>template文件不一定要放在一起，只要在client文件夹里面就可以了，因为在运行的时候，Meteor会自动把这些模板组织到一起</p>
-<p>最后，讲下iron:router, 在github上的官方文档：<a href="https://github.com/eventedmind/iron-router" target="_blank" rel="external">https://github.com/eventedmind/iron-router</a><br>首先安装这个包</p>
-<pre><code>meteor add iron:router
-</code></pre><p>运行下，我们能看到<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Router.route(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.render(<span class="string">'Home'</span>, &#123;</span><br><span class="line">    data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> Items.findOne(&#123;_id: <span class="keyword">this</span>.params._id&#125;); &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>按照上面的实例，我们就能够一个个地配置页面。但是现实的情况是有很多的页面需要配置，并且我们要在不同的页面之间切换，可以考虑下面的方法：<br>首先在client下面建立一个模板文件main.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">template</span> <span class="attribute">name</span>=<span class="value">"ApplicationLayout"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">title</span>&gt;</span>textCircle<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line">	&#123;&#123;&gt; yield "header"&#125;&#125;</span><br><span class="line">	</span><br><span class="line">	&#123;&#123;&gt; yield "main"&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="title">template</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>这里有yield，它和我们看到的普通模板一样，实际上也是一个模板文件，能加载后面参数提供的模板。<br>然后，我们在client文件夹下面的main.js中写入router：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Router.configure(&#123;</span><br><span class="line">  layoutTemplate:<span class="string">'ApplicationLayout'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Router.route(<span class="string">'/'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"you hit /"</span>);</span><br><span class="line">  <span class="keyword">this</span>.render(<span class="string">"navbar"</span>, &#123;to:<span class="string">"header"</span>&#125;);</span><br><span class="line">  <span class="keyword">this</span>.render(<span class="string">"docList"</span>, &#123;to:<span class="string">"main"</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Router.route(<span class="string">'/documents/:_id'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"you hit /"</span>+<span class="keyword">this</span>.params._id);</span><br><span class="line">  Session.set(<span class="string">"docid"</span>,<span class="keyword">this</span>.params._id)</span><br><span class="line">  <span class="keyword">this</span>.render(<span class="string">"navbar"</span>, &#123;to:<span class="string">"header"</span>&#125;);</span><br><span class="line">  <span class="keyword">this</span>.render(<span class="string">"docItem"</span>, &#123;to:<span class="string">"main"</span>&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>这样就有了两个页面，文中的navbar，docList，docItem是自己建立的模板。这两个路由分别会渲染ApplicationLayout中的两个模板。</p>
-
+            <p>由于历史原因JavaScript对浏览器端的应用定义了APIs，但是没有为很多其他的应用定义一个标准库，所以后来的开发者弄出了CommonJS API以填补这个坑。使用CommonJS，人们就能做一下事情：<br><a id="more"></a></p>
+<ul>
+<li>服务端的JS应用</li>
+<li>命令行工具</li>
+<li>桌面GUI应用</li>
+<li>混合程序（Titanium, Adobe AIR）</li>
+</ul>
+<p>CommonJS定义了常用模块的格式，Node也继承了CommonJS的标准。</p>
+<p>CommonJS模块标准参见：<a href="http://wiki.commonjs.org/wiki/Modules/1.1.1" target="_blank" rel="external">http://wiki.commonjs.org/wiki/Modules/1.1.1</a></p>
+<p>那么Node Modules怎么使用呢？</p>
+<pre><code>Node中的每一个文件是它自身的模块（module）；
+module的变量作用域是当前的module所在的文件 ；
+module.exports定义了当前module的输出 ；
+使用require函数以引入module ；
+</code></pre><p>举个栗子吧：<br>新建一个文件名为rectangle.js:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">	perimeter: <span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>) </span>&#123; <span class="keyword">return</span> (<span class="number">2</span>*(x+y)); &#125;,</span><br><span class="line">	area: <span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>) </span>&#123; <span class="keyword">return</span> ( x*y) )); &#125; &#125;;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在同级目录下，建立另一个文件solveRect.js,这就实现了引入模块<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rect = <span class="built_in">require</span>(‘./rectangle’);</span><br></pre></td></tr></table></figure></p>
+<p>当然还有另一种直接的方式输出：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">exports.perimeter = <span class="function"><span class="keyword">function</span> <span class="params">(x, y)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> (<span class="number">2</span>*(x+y)); &#125;</span><br><span class="line">exports.area = <span class="function"><span class="keyword">function</span> <span class="params">(x, y)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> (x*y); &#125;</span><br></pre></td></tr></table></figure></p>
+<p>实际上，Node.js的modules分为三类</p>
+<ul>
+<li>自定义的module</li>
+<li>核心模块：比如path,fs,os,util</li>
+<li>第三方模块：通过NPM安装后存在于node_modules的文件夹内</li>
+</ul>
+<p>这三类模块的使用方法也差不多：</p>
+<pre><code>自定义的：require(&apos;./module_name&apos;)
+核心和第三方模块：require(&apos;module_name&apos;)
+</code></pre><p>Node寻找第三方模块的顺序是依次从当前目录的./node_modules找，接着找上一级目录的../node_modules，一直找到最上层目录，直到找到为止</p>
+<p>对于一个Node模块来说，我们可查看他的package.json文件来了解它包含的信息：</p>
+<pre><code>版本version：依次是&lt;MajorVersion&gt;.&lt;MinorVersion&gt;.&lt;Patch&gt;
+使用npm安装特定包的版本有三种方式：
+    精确匹配只兼容这一个版本：npm install express@4.0.0
+    只兼容补丁包(Patch)：npm install express@&quot;~4.0.0&quot;
+    可兼容小版本：npm install express@&quot;^4.0.0&quot;
+</code></pre><p>版本依赖</p>
+<pre><code>npm install express --save
+</code></pre><p>当你安装的时候带上了 –save ,npm会自动在你命令所在目录里找到 package.json 文件,并追加到依赖配置最后一样。<br>当不加任何版本安装时,默认追加方式是这样的:</p>
+<pre><code>&quot;express&quot;: &quot;^4.0.0&quot;
+</code></pre>
             
                 
 
@@ -251,7 +273,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/Meteor/">Meteor</a> <a class="tag tag--primary tag--small t-link" href="/tags/router/">router</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/Node-Modules/">Node Modules</a> <a class="tag tag--primary tag--small t-link" href="/tags/Node-js/">Node.js</a> <a class="tag tag--primary tag--small t-link" href="/tags/Node模块/">Node模块</a>
 
             </div>
         
@@ -260,7 +282,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/14/Node函数回调和错误处理/"  data-tooltip="Node函数回调和错误处理(Callbacks,Error Handling)">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -268,7 +290,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/02/23/Tranquilpeak设置问题/" data-tooltip="Tranquilpeak设置问题">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/14/Node函数回调和错误处理/" data-tooltip="Node函数回调和错误处理(Callbacks,Error Handling)">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -284,23 +306,23 @@
         </li>
 
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default tooltip--left"  target="new" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="post-action-btn btn btn--default tooltip--left"  target="new" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-qq"></i>
             </a>
         </li>
 
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new"   href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="post-action-btn btn btn--default" target="new"   href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-weixin"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="post-action-btn btn btn--default" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new"  href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="post-action-btn btn btn--default" target="new"  href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-renren"></i>
             </a>
         </li>
@@ -325,8 +347,8 @@
 
         
             
-                <div id="ds-thread" class="ds-thread" style="width:100%;postion:absolute;right:5px;" data-thread-key="2016/02/23/Meteor自动表单和路由/"
-     data-title="Meteor自动表单和路由" data-url="http://localhost:4000/2016/02/23/Meteor自动表单和路由/">
+                <div id="ds-thread" class="ds-thread" style="width:100%;postion:absolute;right:5px;" data-thread-key="2016/03/14/理解Modules/"
+     data-title="理解Node模块(Node Modules)" data-url="http://localhost:4000/2016/03/14/理解Modules/">
 </div>
 
             
@@ -350,7 +372,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/14/Node函数回调和错误处理/"  data-tooltip="Node函数回调和错误处理(Callbacks,Error Handling)">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -358,7 +380,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/02/23/Tranquilpeak设置问题/" data-tooltip="Tranquilpeak设置问题">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/14/Node函数回调和错误处理/" data-tooltip="Node函数回调和错误处理(Callbacks,Error Handling)">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -374,23 +396,23 @@
         </li>
 
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default tooltip--left"  target="new" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="post-action-btn btn btn--default tooltip--left"  target="new" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-qq"></i>
             </a>
         </li>
 
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new"   href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="post-action-btn btn btn--default" target="new"   href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-weixin"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="post-action-btn btn btn--default" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new"  href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="post-action-btn btn btn--default" target="new"  href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-renren"></i>
             </a>
         </li>
@@ -417,17 +439,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="3">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-weibo"></i><span class="">分享到 新浪微博</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-qq"></i><span>分享到 QQ空间</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/02/23/Meteor自动表单和路由/&amp;title=Meteor自动表单和路由">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=renren&amp;appkey=&amp;uid=2084798&amp;url=http://localhost:4000/2016/03/14/理解Modules/&amp;title=理解Node模块(Node Modules)">
                 <i class="fa fa-renren"></i><span>分享到人人网</span>
             </a>
         </li>
